@@ -1,0 +1,323 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
+   <title>Installing C/C++ Graphics Library in Ubuntu/Fedora</title>
+   
+   <meta name="keywords" content="siddharth1024, sidx1024, graphics.h, ubuntu, fedora, elementaryOS">
+    <meta name="author" content="Siddharth Goswami">
+    <meta name="description" content="Instructions for installing C/C++ graphics library in Ubuntu/elementaryOS/Fedora">
+   
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <style>
+        html,
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #222;
+            background-color: #667;
+            margin: 0;
+        }
+        
+        h1 {
+            padding: 10px;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+        
+        h1,
+        h2 {
+            font-weight: 600;
+        }
+        
+        h1:after {
+            color: #DDE;
+        }
+        
+        h2:after {
+            color: #113;
+        }
+        
+        code {
+            display: block;
+            background-color: #DDF;
+            font-size: 12px;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400;
+            text-overflow: clip;
+        }
+        
+        .section {
+            display: inline-block;
+            float: left;
+            max-width: 43%;
+            padding: 2%;
+            margin-left: 2%;
+            margin-top: 10px;
+            background-color: #EEE;
+            box-shadow: 5px 5px 15px;
+            margin-bottom: 20px;
+        }
+        
+        .caution {
+            background-color: rgb(255, 255, 128);
+            font-size: 12px;
+            padding: 5px;
+            font-weight: 600;
+        }
+        
+        .author {
+            display: block;
+            clear: both;
+            background-color: #444;
+            padding: 10px;
+            padding-top: 10px;
+            text-align: right;
+        }
+        
+        .author a {
+            color: #777;
+            text-decoration:none;
+        }
+        
+        @media(max-width:800px) {
+            .section {
+                float: none;
+                max-width: 90%;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color:#EEE;font-weight:300;">Installing C/C++ Graphics Library in Ubuntu/Fedora &not;</h1>
+    <div class="section">
+        <h2>Instructions for Ubuntu / elementaryOS &not;</h2>
+        <ol>
+            <li>Make sure you have <b>gcc</b> and <b>g++</b> compilers installed.
+                <br> If not, then install with,
+                <br/> <code>
+                sudo apt-get install build-essential
+            </code> </li>
+            <br/>
+            <li> Install SDL Libraries
+                <br/> <code>sudo apt-get install libsdl-image1.2 libsdl-image1.2-dev guile-1.8 guile-1.8-dev libsdl1.2debian libart-2.0-dev libaudiofile-dev libesd0-dev libdirectfb-dev libdirectfb-extra libfreetype6-dev libxext-dev x11proto-xext-dev libfreetype6 libaa1 libaa1-dev libslang2-dev libasound2 libasound2-dev</code>
+                <br/> If you get errors such as :
+                <br/> <code>
+                    E: Unable to locate package libslang2-dev<br/>
+                    E: Unable to locate package libasound2-dev
+                </code>
+                <br/> Then execute the following command to update repository list :
+                <br/> <code>
+                    sudo apt-get update
+                </code>
+                <br/> Run the command to Install SDL libraries again. </li>
+            <br/>
+            <li> Obtain a copy of <b>libgraph-1.0.2.tar.gz</b> by following command
+                <br/> <code>wget http://ftp.twaren.net/Unix/NonGNU/libgraph/libgraph-1.0.2.tar.gz</code>
+                <br/>OR if the link doesn't work
+                <br/> <code>wget http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz</code>
+                <br/> OR download it manually from <a href="http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz">here</a> or <a href="http://ftp.twaren.net/Unix/NonGNU/libgraph/libgraph-1.0.2.tar.gz">here</a> </li>
+            <br/>
+            <li>Extract <b>libgraph-1.0.2.tar.gz</b> using following command :
+                <br/> <code>tar xf libgraph-1.0.2.tar.gz</code>
+                <br/> </li>
+            <li> Run the following commands (copy-paste will work, in terminal, paste by right-click menu <b>not</b> by CTRL + V) :
+                <br/> <code>     cd libgraph-1.0.2<br/>
+
+     ./configure<br/>
+
+     sudo make<br/>
+
+     sudo make install<br/>
+
+     sudo cp /usr/local/lib/libgraph.* /usr/lib</code>
+                <br/> If you get
+                <br/><code>configure: error: *** SDL version 1.2.0 not found!</code>
+                <br/> in <code>./configure</code>
+                <br/>then SDL libraries were not successfully installed, perform <b>Step 2</b> again. </li>
+            <br/>
+            <li> Write your C/C++ graphics program, sample program is given below :
+                <br/>
+                <br/>
+                <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; width:auto"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#include&lt;stdio.h&gt;</span>
+<span style="color: #408080; font-style: italic">#include&lt;graphics.h&gt;</span>
+
+<span style="color: #008000">int</span> main()
+{
+	<span style="color: #008000">int</span> GM, GD;
+	initgraph(<span style="color: #666666">&amp;</span>GM,<span style="color: #666666">&amp;</span>GD,&nbsp;NULL);
+
+	circle(<span style="color: #666666">320</span>, <span style="color: #666666">240</span>, <span style="color: #666666">60</span>);
+	
+	scanf(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&quot;</span>,<span style="color: #666666">&amp;</span>GD); // to hold the screen
+}
+</pre></div>
+            </li>
+            <br/>
+            <li> Compile your program using :
+                <br/> <code>g++ myprogram.cpp -lgraph</code>
+                <br/>OR
+                <br/> <code>gcc myprogram.c -lgraph</code> </li>
+            <br/>
+            <li> Execute program : <code>
+                    ./a.out
+                </code> </li>
+        </ol>
+    </div>
+    <div class="section">
+        <h2>Fast-track installation for Ubuntu <sup><span class="caution">May or may not work</span></sup> &not;</h2>
+        <h3>First perform any sudo command to enter password, such as</h3> <code>sudo echo</code>
+        <h3>Now password won't be prompted for subsequent commands</h3>
+        <h3><br/>Copy &amp; paste the following block in terminal<br/>Don't use CTRL + V, use right-click menu then paste</h3> <code>
+           sudo apt-get update<br/>
+            sudo apt-get install build-essential<br/><br/>
+            sudo apt-get install libsdl-image1.2 libsdl-image1.2-dev guile-1.8 guile-1.8-dev libsdl1.2debian libart-2.0-dev libaudiofile-dev libesd0-dev libdirectfb-dev libdirectfb-extra libfreetype6-dev libxext-dev x11proto-xext-dev libfreetype6 libaa1 libaa1-dev libslang2-dev libasound2 libasound2-dev<br/><br/>
+            
+            wget http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz<br/>
+            tar xf libgraph-1.0.2.tar.gz<br/>
+                 cd libgraph-1.0.2<br/>
+
+     ./configure<br/>
+
+     sudo make<br/>
+
+     sudo make install<br/>
+
+     sudo cp /usr/local/lib/libgraph.* /usr/lib
+            <br/>
+        </code>
+        <br/>
+        <h3>Test program</h3>
+        <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; width:auto"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#include&lt;stdio.h&gt;</span>
+<span style="color: #408080; font-style: italic">#include&lt;graphics.h&gt;</span>
+
+<span style="color: #008000">int</span> main()
+{
+	<span style="color: #008000">int</span> GM, GD;
+	initgraph(<span style="color: #666666">&amp;</span>GM,<span style="color: #666666">&amp;</span>GD,&nbsp;NULL);
+
+	circle(<span style="color: #666666">320</span>, <span style="color: #666666">240</span>, <span style="color: #666666">60</span>);
+	
+	scanf(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&quot;</span>,<span style="color: #666666">&amp;</span>GD); // to hold the screen
+}
+</pre></div>
+        <h3>Compile and execute</h3> <code>
+       g++ myprogram.cpp -lgraph<br/>
+       ./a.out
+   </code> </div>
+   <!-- github.com/siddharth1024 -->
+    <div class="section">
+        <h2>Important instructions for writing program &not;</h2>
+        <ol>
+            <li>Use <b>NULL</b> in <b><i>initgraph()</i></b> function graphics driver path.</li>
+            <li>Don't forget to add <b>-lgraph</b> argument when compiling.</li>
+            <li><b>getch()</b> can't be used in linux operating systems as <b>conio.h</b> header file is not present.</li>
+            <li>To hold the graphics output screen, use <b><i>scanf()</i></b> function instead of <b><i>getch()</i></b>.</li>
+        </ol>
+    </div>
+    <div class="section" style="clear:left;">
+        <h2>Instructions for Fedora &not;</h2>
+        <ol>
+            <li> Obtain a copy of <b>libgraph-1.0.2.tar.gz</b> by following command
+                <br/> <code>wget http://ftp.twaren.net/Unix/NonGNU/libgraph/libgraph-1.0.2.tar.gz</code>
+                <br/>OR if the link doesn't work
+                <br/> <code>wget http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz</code>
+                <br/> OR download it manually from <a href="http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz">here</a> or <a href="http://ftp.twaren.net/Unix/NonGNU/libgraph/libgraph-1.0.2.tar.gz">here</a> </li>
+            <br/>
+            <li>Extract <b>libgraph-1.0.2.tar.gz</b> using following command :
+                <br/> <code>tar xf libgraph-1.0.2.tar.gz</code>
+                <br/> </li>
+            <li> Install SDL libraries (run following commands separately)
+                <br/> <code>
+                    yum install SDL.x86_64 SDL-devel.x86_64 SDL_image.x86_64 SDL_image-devel.x86_64<br/><br/>
+                    yum install guile guile.x86_64 guile.i686 guile-devel.x86_64 compat-guile18-devel.x86_64
+                </code>
+                <br/> </li>
+            <li> Run the following commands separately :
+                <br/> <code>./configure<br/>
+
+     make<br/>
+
+     make check<br/>
+
+     make install<br/>
+           sudo cp /usr/local/lib/libgraph.* /usr/lib</code></li>
+            <br/>
+            <li> Write your C/C++ graphics program, sample program is given below :
+                <br/>
+                <br/>
+                <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; width:auto"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#include&lt;stdio.h&gt;</span>
+<span style="color: #408080; font-style: italic">#include&lt;graphics.h&gt;</span>
+
+<span style="color: #008000">int</span> main()
+{
+	<span style="color: #008000">int</span> GM, GD;
+	initgraph(<span style="color: #666666">&amp;</span>GM,<span style="color: #666666">&amp;</span>GD,&nbsp;NULL);
+
+	circle(<span style="color: #666666">320</span>, <span style="color: #666666">240</span>, <span style="color: #666666">60</span>);
+	
+	scanf(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&quot;</span>,<span style="color: #666666">&amp;</span>GD); // to hold the screen
+}
+</pre></div>
+            </li>
+            <br/>
+            <li> Compile your program using :
+                <br/>
+                <br/> <code>g++ myprogram.cpp -lgraph</code>
+                <br/>OR
+                <br/> <code>gcc myprogram.c -lgraph</code> </li>
+            <br/>
+            <li> Execute program : <code>
+                    ./a.out
+                </code> </li>
+        </ol>
+    </div>
+    <div class="section">
+        <h2>Fast-track installation for Fedora <sup><span class="caution">May or may not work</span></sup> &not;</h2>
+        <h3><br/>Copy &amp; paste the following block in terminal<br/>Don't use CTRL + V, use right-click menu then paste</h3>
+        <h3>Run following commands as <em style="color:#cc4646;">root/su</em></h3> <code>wget http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz<br/>
+        tar xf libgraph-1.0.2.tar.gz<br/>
+                 cd libgraph-1.0.2<br/>
+
+     ./configure<br/>
+
+     make<br/>
+
+     make check<br/>
+     
+     make install<br/>
+
+     cp /usr/local/lib/libgraph.* /usr/lib
+            <br/>
+        </code>
+        <br/>
+        <h3>Test program</h3>
+        <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; width:auto"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#include&lt;stdio.h&gt;</span>
+<span style="color: #408080; font-style: italic">#include&lt;graphics.h&gt;</span>
+
+<span style="color: #008000">int</span> main()
+{
+	<span style="color: #008000">int</span> GM, GD;
+	initgraph(<span style="color: #666666">&amp;</span>GM,<span style="color: #666666">&amp;</span>GD,&nbsp;NULL);
+
+	circle(<span style="color: #666666">320</span>, <span style="color: #666666">240</span>, <span style="color: #666666">60</span>);
+	
+	scanf(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&quot;</span>,<span style="color: #666666">&amp;</span>GD); // to hold the screen
+}
+</pre></div>
+        <h3>Compile and execute</h3> <code>
+       g++ myprogram.cpp -lgraph<br/>
+       ./a.out
+   </code> </div>
+    <div class="author"> 
+    <a href="https://siddharth1024.github.io/GraphicsLinux/" style="float:left;">siddharth1024.github.io &rsaquo; GraphicsLinux</a>
+    
+    <a href="http://github.com/siddharth1024">github.com &rsaquo; siddharth1024</a> </div>
+</body>
+
+</html>
